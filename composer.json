@@ -1,0 +1,26 @@
+{
+    "name": "bachphuc/php-laravel-helpers",
+    "description": "php helper for laravel",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "bachphuc",
+            "email": "trieuquangphuc123@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "bachphuc\\PhpLaravelHelpers\\": "src/"
+        },
+        "files": [
+            "src/helpers.php",
+            "src/str-helpers.php"
+        ]
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}
