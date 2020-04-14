@@ -15,7 +15,10 @@
         },
         "files": [
             "src/helpers.php",
-            "src/str-helpers.php"
+            "src/str-helpers.php",
+            "src/model_helpers.php",
+            "src/datetime_helpers.php",
+            "src/route_helpers.php"
         ]
     },
     "extra": {
