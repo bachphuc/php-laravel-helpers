@@ -19,7 +19,8 @@
             "src/model_helpers.php",
             "src/datetime_helpers.php",
             "src/route_helpers.php",
-            "src/image_helpers.php"
+            "src/image_helpers.php",
+            "src/auth_helpers.php"
         ]
     },
     "extra": {

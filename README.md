@@ -16,6 +16,21 @@
 
 ## Trail Models
 
-- WithImage
-- WithModelBase
-- WithModelRule
+### WithModelBase: Function
+- hasField
+- getId
+- getType
+- getTitle
+- getDesc
+- getHref
+- getImage
+- remove
+- increase
+- display
+- displayDetail
+- onCreated
+- getListItems
+- processGetItemListQuery
+
+### WithImage
+### WithModelRule

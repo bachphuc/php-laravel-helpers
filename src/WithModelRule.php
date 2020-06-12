@@ -1,7 +1,8 @@
 <?php
 namespace bachphuc\PhpLaravelHelpers;
 
-trait WithModelRule {
+trait WithModelRule
+{
     public function canDeleteBy(\App\User $user = null)
     {
         if (!$user) {
@@ -16,14 +17,13 @@ trait WithModelRule {
             return false;
         }
 
-        if($this->hasField('user_id')){
+        if ($this->hasField('user_id')) {
             return $user->id == $this->user_id ? true : false;
-        }
-        else if($this->hasField('owner_id')){
+        } else if ($this->hasField('owner_id')) {
             return $user->id == $this->owner_id ? true : false;
         }
         return false;
-    }  
+    }
 
     public function canDelete()
     {
@@ -46,7 +46,7 @@ trait WithModelRule {
         }
 
         // if this is User
-        if($this instanceof \App\User){
+        if ($this instanceof \App\User) {
             return $this->id == $user->id ? true : false;
         }
 
@@ -57,5 +57,23 @@ trait WithModelRule {
     {
         $user = auth()->user();
         return $this->canEditBy($user);
+    }
+
+    public function isOwner(\App\User $user = null)
+    {
+        if (!$user) {
+            $user = auth()->user();
+        }
+        if (!$user) {
+            return false;
+        }
+
+        if ($this->hasField('user_id')) {
+            return $user->id == $this->user_id ? true : false;
+        } else if ($this->hasField('owner_id')) {
+            return $user->id == $this->owner_id ? true : false;
+        }
+
+        return false;
     }
 }
