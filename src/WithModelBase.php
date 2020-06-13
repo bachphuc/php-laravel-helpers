@@ -216,4 +216,14 @@ trait WithModelBase
     {
 
     }
+
+    public static function displays($items)
+    {
+        $results = [];
+        foreach ($items as $item) {
+            $results[] = $item->display();
+        }
+
+        return $results;
+    }
 }
