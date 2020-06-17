@@ -221,7 +221,11 @@ trait WithModelBase
     {
         $results = [];
         foreach ($items as $item) {
-            $results[] = $item->display();
+            $tmp = $item->display();
+
+            if($tmp){
+                $results[] = $tmp;
+            }
         }
 
         return $results;
