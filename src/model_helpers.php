@@ -53,6 +53,18 @@ function model_class($str)
         }
     }
 
+    // try to resolve class
+    $obj = null;
+    try{
+        $obj = resolve($str);
+        if($obj){
+            return get_class($obj);
+        }
+    }
+    catch(\Exception $e){
+        
+    }
+
     return null;
 }
 

@@ -8,3 +8,14 @@ if (!function_exists('user_id')) {
         return 0;
     }
 }
+
+if (!function_exists('user_name')) 
+{
+    function user_name()
+    {
+        if(auth()->user()){
+            return auth()->user()->name;
+        }
+        return '';
+    }
+}

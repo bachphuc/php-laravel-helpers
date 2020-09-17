@@ -72,4 +72,63 @@ trait WithImage {
             $this->save();
         }
     }
+
+    public function getWebPThumbnailImage($size = 120, $fullPath = true){
+        if(!$this->hasWebPThumbnailImage($size)){
+            return null;
+        }
+        $fieldThumbnail = 'webp_thumbnail_' . $size;
+        $image = $this->{$fieldThumbnail};
+        if($fullPath){
+            if(!empty($image)){
+                return asset($image);
+            }
+        }
+        return $image;
+    }
+
+    public function hasWebPThumbnailImage($size){
+        $fieldThumbnail = 'webp_thumbnail_' . $size;
+        if($this->hasField($fieldThumbnail) && !empty($this->{$fieldThumbnail})){
+            return true;
+        }
+        return false;
+    }
+
+    public function getThumbnailImage($size = 120, $fullPath = true, $bUseDefaultImage = true, $params = [])
+    {
+        $bEnableWebPSupport = isset($params['enable_webp']) ? $params['enable_webp'] : true;
+
+        $image = '';
+        if (!isset($this->image) || empty($this->image)) {
+            if($bUseDefaultImage){
+                $image = $this->defaultImage;
+            }
+        }
+        else{
+            $fieldThumbnail = 'thumbnail_' . $size;
+            if (!isset($this->{$fieldThumbnail}) || empty($this->{$fieldThumbnail})) {
+                $image = $this->image;
+            }
+            else{
+                $image = $this->{$fieldThumbnail};
+                if($bEnableWebPSupport){
+                    // check if support webp
+                    if($this->hasField('webp_' . $fieldThumbnail) && is_support_webp()){
+                        $webpImage = $this->{'webp_' . $fieldThumbnail};
+                        if(!empty($webpImage)){
+                            $image = $webpImage;
+                        }
+                    }
+                }
+            }
+        }
+
+        if($fullPath){
+            if(!empty($image)){
+                return asset($image);
+            }
+        }
+        return $image;
+    }
 }
