@@ -90,3 +90,23 @@ if (!function_exists('value_of')) {
         return $result;
     }
 }
+
+if (!function_exists('array_extract')) {
+    function array_extract($ar, $fields = [], $merge = []){
+        if(!$ar) return [];
+
+        if(empty($fields)) return [];
+        $result = [];
+        foreach($fields as $field){
+            if(isset($ar[$field]) && $ar[$field] !== null){
+                $result[$field] = $ar[$field];
+            }
+        }
+
+        if(!empty($merge)){
+            return array_merge($result, $merge);
+        }
+
+        return $result;
+    }
+}

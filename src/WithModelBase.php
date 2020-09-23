@@ -226,4 +226,10 @@ trait WithModelBase
 
         return $results;
     }
+
+    public function getField($field, $params = []){
+        if($this->hasField($field)) return $this->{$field};
+
+        return null;
+    }
 }
