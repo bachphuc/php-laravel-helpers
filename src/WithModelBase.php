@@ -54,6 +54,10 @@ trait WithModelBase
         return url(str_plural($this->itemType) . '/' . $this->id);
     }
 
+    public function getAdminHref(){
+        return url('admin/' . str_plural($this->itemType) . '/' . $this->id);
+    }
+
     public function getImage()
     {
         if ($this->hasField('image')) {

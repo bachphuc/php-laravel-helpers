@@ -131,4 +131,8 @@ trait WithImage {
         }
         return $image;
     }
+
+    public function hasImage(){
+        return $this->hasField('image') && !empty($this->image) ? true : false;
+    }
 }

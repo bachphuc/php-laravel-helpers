@@ -110,3 +110,8 @@ if (!function_exists('array_extract')) {
         return $result;
     }
 }
+
+function is_modal_request(){
+    if(request()->header('page-type') == 'modal') return true;
+    return false;
+}
