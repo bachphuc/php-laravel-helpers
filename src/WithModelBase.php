@@ -78,6 +78,12 @@ trait WithModelBase
         return null;
     }
 
+    public function getCover(){
+        if($this->hasField('cover')) return  url($this->cover);
+
+        return $this->getImage();
+    }
+
     public function remove()
     {
         return $this->delete();
@@ -235,5 +241,17 @@ trait WithModelBase
         if($this->hasField($field)) return $this->{$field};
 
         return null;
+    }
+
+    public function getMetaDesc(){
+        return $this->getDesc();
+    }
+
+    public function getMetaTitle(){
+        return $this->getTitle();
+    }
+
+    public function getTags(){
+        return [];
     }
 }
