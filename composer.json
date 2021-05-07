@@ -28,6 +28,9 @@
             "dev-master": "1.0-dev"
         },
         "laravel": {
+            "providers": [
+                "bachphuc\\PhpLaravelHelpers\\Providers\\PackageServiceProvider"
+            ],
             "aliases": {
                 "LaravelHelpers": "bachphuc\\PhpLaravelHelpers"
             }

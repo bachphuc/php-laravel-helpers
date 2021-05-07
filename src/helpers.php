@@ -115,3 +115,13 @@ function is_modal_request(){
     if(request()->header('page-type') == 'modal') return true;
     return false;
 }
+
+if (!function_exists('size_of')) {
+    function size_of($ar){
+        if(empty($ar)) return 0;
+        if(is_array($ar)){
+            return count($ar);
+        }
+        return $ar->count();
+    }
+}

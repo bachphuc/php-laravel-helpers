@@ -54,6 +54,10 @@ trait WithModelBase
         return url(str_plural($this->itemType) . '/' . $this->id);
     }
 
+    public function getEditHref(){
+        return url(str_plural($this->itemType) . '/' . $this->id . '/edit');
+    }
+
     public function getAdminHref(){
         return url('admin/' . str_plural($this->itemType) . '/' . $this->id);
     }
@@ -79,7 +83,7 @@ trait WithModelBase
     }
 
     public function getCover(){
-        if($this->hasField('cover')) return  url($this->cover);
+        if($this->hasField('cover') && !empty($this->cover)) return  url($this->cover);
 
         return $this->getImage();
     }

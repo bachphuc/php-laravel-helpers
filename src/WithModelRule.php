@@ -37,7 +37,7 @@ trait WithModelRule
             return false;
         }
 
-        if ($user->isAdmin()) {
+        if (method_exists($user, 'isAdmin') && $user->isAdmin()) {
             return true;
         }
 

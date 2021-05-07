@@ -80,3 +80,113 @@ if (!function_exists('model_item')) {
         return $item;
     }
 }
+
+
+function __title($item, $limit = 0){
+    if(!$item) return '';
+    if($limit){
+        return str_limit_words($item->getTitle(), $limit);
+    }
+    $str = $item->getTitle();
+    $str = str_replace('"', '', $str);
+    return $str;
+}
+
+function __desc($item, $limit = 0){
+    if($limit){
+        return str_limit_words($item->getDescription(), $limit);
+    }
+    return $item->getDescription();
+}
+
+function __img($item, $size = null){
+    $img = '';
+    if(empty($size)) {
+        $img = $item->getImage();
+    }
+    else{
+        $img = $item->getThumbnailImage($size);
+    }
+    $img = str_replace(url(''), '', $img);
+    return $img;
+}
+
+function __href($item){
+    return str_replace(url(''), '', $item->getHref());
+}
+
+function __edit_href($item){
+    if(method_exists($item, 'getEditHref')) {
+        return str_replace(url(''), '', $item->getEditHref());
+    }
+    return '/';
+}
+
+function __id($item){
+    return $item->getId();
+}
+
+function __duration($item){
+    return $item->formatDuration();
+}
+
+function __g($item = null, $field = ''){
+    if(empty($item) || empty($field)) return '';
+    $field = trim($field, "'");
+    if(strpos($field, '.') === false){
+        if(method_exists($item, $field)){
+            return $item->{$field}();
+        }
+        $camelField = camel_case($field);
+        if(method_exists($item, $camelField)){
+            return $item->{$camelField}();
+        }
+        return $item->{$field};
+    }
+    $tmp = $item;
+    
+    $parts = explode('.', $field);
+    if(empty($parts)) return '';
+    foreach($parts as $part){
+        if(is_object($tmp)){
+            $tmp = $tmp->{$part};
+        }
+        else if(is_array($tmp)){
+            $tmp = $tmp[$part];
+        }
+    }
+
+    return $tmp;
+}
+
+function __owner($item){
+    return $item->getOwner();
+}
+
+function __owner_id($item){
+    $user = $item->getOwner();
+    if(!$user) return 0;
+    return $user->getId();
+}
+
+function __owner_name($item){
+    $user = $item->getOwner();
+    if(!$user) return '';
+    return $user->getTitle();
+}
+
+function __owner_href($item){
+    $user = $item->getOwner();
+    if(!$user) return '';
+    return str_replace(url(''), '', $user->getHref());
+}
+
+function __channel_href($item){
+    $user = $item->getOwner();
+    if(!$user) return '';
+    return str_replace(url(''), '', $user->getVideoChanelHref());
+}
+
+function __created_at($item){
+    return $item->formatCreatedTime();
+}
