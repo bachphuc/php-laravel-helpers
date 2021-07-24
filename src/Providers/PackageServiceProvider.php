@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Blade;
 
+use bachphuc\PhpLaravelHelpers\Middleware\AuthAdmin;
+
 class PackageServiceProvider extends ServiceProvider
 {
     /**
@@ -26,6 +28,11 @@ class PackageServiceProvider extends ServiceProvider
     public function boot()
     {
         $packagePath = dirname(__DIR__);
+
+        $router = $this->app->make('router');
+        
+        // register middleware
+        $router->aliasMiddleware('auth.admin', AuthAdmin::class);
     }
 
     /**

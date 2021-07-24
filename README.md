@@ -34,3 +34,6 @@
 
 ### WithImage
 ### WithModelRule
+
+## Middleware
+- auth.admin
