@@ -111,6 +111,23 @@ if (!function_exists('array_extract')) {
     }
 }
 
+if (!function_exists('array_to_columns')) {
+    function array_to_columns($ar, $numCols = 3){
+        if(!$ar) return [];
+
+        $result = [];
+        for($i = 0; $i < $numCols; $i++){
+            $result[] = [];
+        }
+
+        foreach($ar as $key => $t){
+            $result[$key % $numCols][] = $t;
+        }
+
+        return $result;
+    }
+}
+
 function is_modal_request(){
     if(request()->header('page-type') == 'modal') return true;
     return false;
